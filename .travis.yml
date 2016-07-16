@@ -23,6 +23,7 @@ matrix:
 install:
 #  - pip install . --use-mirrors
 #  - pip install -r requirements.txt --use-mirrors
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/X11R6/include; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then PYTHON_EXE=python PIP_CMD=pip; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx.sh; fi
   - $PIP_CMD install --upgrade setuptools pip
@@ -30,8 +31,11 @@ install:
   - $PYTHON_EXE config.py -auto
   - $PYTHON_EXE setup.py install -noheaders
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/local/lib/; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/local/include/; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cat Setup; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L `find . -name imageext.so`; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L `find . -name image.so`; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L /usr/local/opt/sdl_image/lib/libSDL_image-1.2.0.dylib; fi
 
 
 env:
