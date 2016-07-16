@@ -48,6 +48,9 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink libtiff; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install jpeg libpng libtiff webp flac fluid-synth smpeg libmikmod libvorbis portmidi freetype; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl sdl_image sdl_mixer sdl_ttf smpeg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew info sdl_mixer; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew info sdl_image; fi
+
   # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
   # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev python-numpy libportmidi-dev libjpeg-dev libtiff4-dev libx11-6 libX11-dev xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic; fi
 
