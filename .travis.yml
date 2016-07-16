@@ -30,6 +30,8 @@ install:
   - $PIP_CMD install --upgrade setuptools pip
   - $PIP_CMD install --upgrade numpy
   - $PYTHON_EXE config.py -auto
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sed 's/-I\/usr\/X11R6\/include //g' Setup > Setup.new; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv Setup.new Setup; fi
   - $PYTHON_EXE setup.py install -noheaders
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/local/lib/; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/local/include/; fi
