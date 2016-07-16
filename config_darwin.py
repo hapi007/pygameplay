@@ -123,10 +123,12 @@ def main():
     global DEPS
 
     print ('Hunting dependencies...')
-    incdirs = ['/usr/local/include', '/usr/local/include/SDL', 
-                '/usr/X11/include', '/opt/local/include', 
-                '/opt/local/include/freetype2/freetype']
-    libdirs = ['/usr/local/lib', '/usr/X11/lib', '/opt/local/lib']
+    incdirs = ['/usr/local/include', '/usr/local/include/SDL',
+               #'/usr/X11/include',
+               '/opt/local/include',
+               '/opt/local/include/freetype2/freetype']
+    #libdirs = ['/usr/local/lib', '/usr/X11/lib', '/opt/local/lib']
+    libdirs = ['/usr/local/lib', '/opt/local/lib']
 
     for d in DEPS:
         if isinstance(d, (list, tuple)):
