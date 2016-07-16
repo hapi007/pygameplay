@@ -31,6 +31,8 @@ install:
   - $PYTHON_EXE setup.py install -noheaders
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/local/lib/; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cat Setup; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L `find . -name imageext.so`; fi
+
 
 env:
   global:
