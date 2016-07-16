@@ -39,8 +39,6 @@ env:
 script:
   - $PYTHON_EXE -m pygame.tests.__main__ --exclude opengl
 
-
-
 # Here we install the ubuntu dependencies with apt-get.
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
