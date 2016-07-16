@@ -23,6 +23,7 @@ matrix:
 install:
 #  - pip install . --use-mirrors
 #  - pip install -r requirements.txt --use-mirrors
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sdl-config --libs; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/X11R6/include; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then PYTHON_EXE=python PIP_CMD=pip; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx.sh; fi
