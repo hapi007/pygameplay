@@ -106,6 +106,7 @@ def add_datafiles(data_files, dest_dir, pattern):
 if "-setuptools" in sys.argv:
     from setuptools import setup, find_packages
     sys.argv.remove ("-setuptools")
+from setuptools import setup, find_packages
 
 
 # NOTE: the bdist_mpkg_support is for darwin.

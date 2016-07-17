@@ -59,8 +59,24 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install pkg-config; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink libpng; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink libtiff; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install jpeg libpng libtiff webp flac fluid-synth smpeg libmikmod libvorbis portmidi freetype; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl sdl_image sdl_mixer sdl_ttf smpeg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install jpeg --universal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libpng --universal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libtiff --universal --with-xz; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install webp --universal --with-libtiff --with-giflib; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libvorbis --universal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libogg --universal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install flac --universal --with-libogg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install fluid-synth; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install smpeg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libmikmod --universal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install portmidi; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install freetype; fi
+
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl --without-x --universal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl_image --universal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl_mixer --universal --with-flac --with-fluid-synth --with-libmikmod --with-libvorbis --with-smpeg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl_ttf --universal; fi
+
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew info sdl_mixer; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew info sdl_image; fi
 
