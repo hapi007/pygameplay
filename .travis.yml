@@ -30,15 +30,9 @@ install:
   - $PIP_CMD install --upgrade setuptools pip
   - $PIP_CMD install --upgrade numpy
   - $PYTHON_EXE config.py -auto
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sed 's/-I\/usr\/X11R6\/include //g' Setup > Setup.new; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv Setup.new Setup; fi
-  - $PYTHON_EXE setup.py install -noheaders
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/local/lib/; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/local/include/; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cat Setup; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L `find . -name imageext.so`; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L `find . -name image.so`; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L /usr/local/opt/sdl_image/lib/libSDL_image-1.2.0.dylib; fi
+
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then $PYTHON_EXE setup.py install -noheaders; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_install.sh; fi
 
 
 env:
@@ -54,31 +48,7 @@ script:
 
 # Here we install the ubuntu dependencies with apt-get.
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink pkg-config; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install pkg-config; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink libpng; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink libtiff; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install jpeg --universal; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libpng --universal; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libtiff --universal --with-xz; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install webp --universal --with-libtiff --with-giflib; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libvorbis --universal; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libogg --universal; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install flac --universal --with-libogg; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install fluid-synth; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install smpeg; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libmikmod --universal; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install portmidi; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install freetype; fi
-
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl --without-x --universal; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl_image --universal; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl_mixer --universal --with-flac --with-fluid-synth --with-libmikmod --with-libvorbis --with-smpeg; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl_ttf --universal; fi
-
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew info sdl_mixer; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew info sdl_image; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh; fi
 
   # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
   # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev python-numpy libportmidi-dev libjpeg-dev libtiff4-dev libx11-6 libX11-dev xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic; fi
