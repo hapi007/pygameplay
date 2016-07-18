@@ -1,64 +1,29 @@
-# travisci continuous integration config file.
-
 language: python
 matrix:
-    include:
-        # - os: linux
-        #   sudo: required
-        #   python: 2.7
-        # - os: linux
-        #   sudo: required
-        #   python: 3.4
-        # - os: linux
-        #   sudo: required
-        #   python: 3.5
-        # - os: osx
-        #   language: generic
-        #   env: PY_VERSION=3
-        - os: osx
-          language: generic
-          env: PY_VERSION=2
-
-# command to install
+  include:
+  - os: osx
+    language: generic
+    env: PY_VERSION=2
 install:
-#  - pip install . --use-mirrors
-#  - pip install -r requirements.txt --use-mirrors
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sdl-config --libs; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/X11R6/include; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then PYTHON_EXE=python PIP_CMD=pip; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx.sh; fi
-  - $PIP_CMD install --upgrade setuptools pip
-  - $PIP_CMD install --upgrade numpy
-  - $PYTHON_EXE config.py -auto
-
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then $PYTHON_EXE setup.py install -noheaders; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_install.sh; fi
-
-
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sdl-config --libs; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/X11R6/include; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then PYTHON_EXE=python PIP_CMD=pip; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx.sh; fi
+- "$PIP_CMD install --upgrade setuptools pip"
+- "$PIP_CMD install --upgrade numpy"
+- "$PYTHON_EXE config.py -auto"
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then $PYTHON_EXE setup.py install -noheaders;
+  fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_install.sh; fi
 env:
   global:
-    - SDL_VIDEODRIVER=dummy
-    - SDL_AUDIODRIVER=disk
-
-# command to run tests
+  - SDL_VIDEODRIVER=dummy
+  - SDL_AUDIODRIVER=disk
+  matrix:
+  - secure: 0srYJ+FgZU5RfCs4bNnKHrfQnRDt21KREyFdq+kU+VJbPX+ZJqhKTh8K8AussqXNZl9Ok+2f3QXJCLmjk2hTS1oG7V26x+/zBJmMJocTnpfwbKNN3J08EDELY24h+yj2MppcWQBKu7R3PDBzkbkLmmQNyB6jZ964eiSo7U+IPQ6GgbSJnhHALL0Ccptg4iuVhnbqI5h686Lr7opA+CERZ3JHsTICJUp0PRwxO5YQDSlYBZA3qG5Zr8RigPl46ewSTMJwH1Q4tl5MURmAjPPITt2XX5OawpNVbdMD+kGkN4URAx8piKaUTUl85Xl/JMv3Y71+xOR0PcuhLXJNwG6Ef00EqdE3QqJ8ADqMlnWQklpmdhPkKD/tEnxhS8m7Pl34PE24RgxDntptq96VoYnW3i4SZLR5Ixcbs2hNui9hkmlp66cjBV4OERj8L6x4SzF1m8cilW5a98xlaVy/oACcheu+x3WAn5wPxLd6FRsUSJt/Nd21tJ7wHeNqAsYsRB//L+llQwvzpLKhe9OvM8BH+Ag8H3fOd2Z9/apVRhH2P/Oa4h9+ALRHgHBv/5abbsT1hrXAmjr1vlHjKMtyzw0CtD3ID3nNuj1Ic0FhwUO6zMwIZFdOI5gZoACyk529/oKzaN36EDInb/To+dIEtMrHWz8Ozk/aXI/uFqb+xb9XiA4=
+  - secure: pKZjTW1LxRgJxRr1AvWY2TFxVPjFf0ByYCA/OIyoISQrSsn7Bzobpfg1+XUpUvhyMu08q5bcVjqflWahgG1AZsg0QSIPzd8JTBhk3I1i1w1BU3qeCtSavi76B0wzyCzo3d5GlczZz8ooOQWyRfOPhMmwnfAsv5t85n5lKHr0+3vvYCEvexhp8jNxNESMWFeP/h5+PdmkCC2QwdcqDAakOjadIIIh6vFH2fKrTku++Rb+ZGXuEgZF9Y3HYZV7PvD++K/kFtnsHDPS4J7YNN9ezp65cpUm+JEbv/Z6IWGAb3oN9mNNBvX711hELrf3sQLPEt8gTSD1hFLCCiwj9sLH/kz4ioT0vG3m1vd01UjL6ft+vGdN/xa6A4mDxWz+88AL9xNB+JgHYBj/TSFSUfc4P1/LQGAiNpKYg4llleOVeUxr/wX5GGzzmfQK18GV0onYlVyAem77hjf6isVjDwVRv22xFtz6wyZIHxXdaLJVWgE2gbT1rmtMLcoQZ2UUSUvz7pSw+6Z2WtUIPSgJ5FYA4zEab02n+J+qxj2M8iynK+865UeWKvBawC/7s6xY+zGMlA+7RBCbdesCaD7MvE87mYNo2hM4ZJxTHsAAMvzMEv9ss2h7DiiXlJ9ltat0S5H4YlX/V70/Q34Tg4HcZNEutqLeZSJmynvZPjqIO3kam7c=
 script:
-  - $PYTHON_EXE -m pygame.tests.__main__ --exclude opengl
-
-
-
-# Here we install the ubuntu dependencies with apt-get.
+- "$PYTHON_EXE -m pygame.tests.__main__ --exclude opengl"
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh; fi
-
-  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
-  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev python-numpy libportmidi-dev libjpeg-dev libtiff4-dev libx11-6 libX11-dev xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic; fi
-
-
-
-# Here we can notify the pygame irc chat.
-
-#notifications:
-#  irc:
-#    channels: "irc.freenode.org#pygame"
-#    on_success: change
-#    on_failure: change
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh;
+  fi
