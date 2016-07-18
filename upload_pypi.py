@@ -17,7 +17,7 @@ password = os.environ['PYPI_PASSWD']
 
 commit = subprocess.check_output(['git', 'log', '-1'])
 print(commit)
-if b'+UPLOAD' not in commit:
+if b'UPLOAD' not in commit:
     print('Not uploading')
     sys.exit(0)
 

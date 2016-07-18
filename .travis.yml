@@ -4,6 +4,8 @@ matrix:
   - os: osx
     language: generic
     env: PY_VERSION=2
+before_install:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh; fi
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sdl-config --libs; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/X11R6/include; fi
@@ -24,7 +26,5 @@ env:
   - secure: wX/NQP3yPFD41yY2iZPrSLVVXpo+4lVIhXPx2SmjwOupsg5RlWls+AU7q7GoUG2TBANgiqAtPI0nlAeGq13y3v+1zs8Jq7fNj1FMluCRdcNveTAi8Q9bOoiAPFjS4oExML1+XTZrPjdIYgSCc5Al75Lq3r05Fp/X1FGzvRawMNQ8D1/0BvwvtzqzzUh5KUlsx8F3623qbZG3pjC/5tgIERk58eA7j9W4AG7NS96Jywp7Nflt/Hfw/cOo1VbXSu++T+4Ua80/2dFPTxv9osV657xNnYxl75jWTa8qBRghkRO0n2Rv41VG3Q+LYmHjfI3hKrirZUaOjj3iI5Rrdi75+Ayopu16aRKxhp2fwYE4Z4OEEf9VZInZhXHiTw3j0S8kKn/lxiA49NmtnhlL7bMzmFUsSWUb8buXW5uuGwVpRfv/0xQxllJBnKYwJ3j0JO3L14BtK7TQZK+czkeEfIMzHBWHdO3a7HTazJ9YrD1fcGZE89bgUkSj2alvDyLEEmiRsUSDe9bNByZG+JNnmX75nhnHaBMKygm7TYN94SQ/mQSMgGWGGB2177xqBv6V9jr+g9JdztvCisLNk3PYxG4aP2nLGgTL06z6rSjUND5MInzC6DoVYXldCjwg3Caa/P+LfSsABrk1Q4YyjhxPubpwbANTSMoZmVIy5SEYUKQRlx8=
 script:
 - "$PYTHON_EXE -m pygame.tests.__main__ --exclude opengl"
-before_install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh; fi
 after_success:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_after_success.sh; fi
