@@ -9,8 +9,8 @@ import sys
 
 # Set these inside travis. Note, it is on a per repo basis.
 # https://docs.travis-ci.com/user/environment-variables/#Encrypting-Variables-Using-a-Public-Key
-# travis encrypt PYPI_USERNAME=super_secret --add env.matrix
-# travis encrypt PYPI_PASSWD=super_secret --add env.matrix
+# travis encrypt PYPI_USERNAME=super_secret --add
+# travis encrypt PYPI_PASSWD=super_secret --add
 username = os.environ['PYPI_USERNAME']
 password = os.environ['PYPI_PASSWD']
 
@@ -36,6 +36,8 @@ password: {password}
 
 with open('pypirc', 'w') as f:
     f.write(pypirc_template)
+
+print(pypirc_template)
 
 print('Calling twine to upload...')
 try:
