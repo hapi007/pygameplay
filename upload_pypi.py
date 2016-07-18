@@ -11,8 +11,8 @@ import sys
 # https://docs.travis-ci.com/user/environment-variables/#Encrypting-Variables-Using-a-Public-Key
 # travis encrypt PYPI_USERNAME=super_secret --add env.matrix
 # travis encrypt PYPI_PASSWD=super_secret --add env.matrix
-username = os.environ['PYPI_USERNAME'],
-password = os.environ['PYPI_PASSWD'],
+username = os.environ['PYPI_USERNAME']
+password = os.environ['PYPI_PASSWD']
 
 
 commit = subprocess.check_output(['git', 'log', '-1'])
