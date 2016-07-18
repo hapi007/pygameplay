@@ -4,4 +4,4 @@ CXXFLAGS="-arch i386 -arch x86_64" CFLAGS="-arch i386 -arch x86_64" LDFLAGS="-ar
 # It also rewrites the .so file linking options. https://pypi.python.org/pypi/delocate
 $PIP_CMD install delocate twine
 delocate-wheel -v dist/*.whl
-$PYTHON_EXE upload_pypi.py
+$PYTHON_EXE .travis_osx_upload_whl.py

@@ -22,7 +22,7 @@ if b'UPLOAD' not in commit:
     sys.exit(0)
 
 # There should be exactly one .whl
-filename = glob.glob('*.whl')[0]
+filename = glob.glob('dist/*.whl')[0]
 
 pypirc_template = """\
 [distutils]
