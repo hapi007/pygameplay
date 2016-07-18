@@ -1,12 +1,23 @@
 language: python
 matrix:
   include:
-  - os: osx
-    language: generic
-    env: PY_VERSION=2
+    - os: linux
+      sudo: required
+      python: 2.7
+    - os: linux
+      sudo: required
+      python: 3.4
+    - os: linux
+      sudo: required
+      python: 3.5
+    - os: osx
+      language: generic
+      env: PY_VERSION=3
+    - os: osx
+      language: generic
+      env: PY_VERSION=2
 before_install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh;
-  fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh;  fi
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sdl-config --libs; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/X11R6/include; fi
@@ -20,8 +31,8 @@ install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_install.sh; fi
 env:
   global:
-  - secure: uaRdZNhheDbD5Axa2+xCMcriA4TzDlbO+BJvF1skdxOVVjZEWRavPfRQeZnfgKV31Gfs6jPnttzDNsjGx+NtXyxvMhEzOrzYPScV7wErVuWoM7cctlbSjQ2W5ZZ6oNVscAvzm8dK646Cejt7QoiX34hilA76qEerJvuw2izviB2g8LR5cu3l9bMrz3Gtpa78Rtmr3v4HYu8xLem+RyfKuqKyEvm7heAJ2fpiZsZ3/oFc2iUSCfqpLbEMXW/9lzA73RYEudYdEC8ZP8voFwaptq9nTYH2wAcE/B7q4ilsCY8js/advxtJhkyhFCx4zczovpk75yeaznWSLBa6uXiZGY87xMj/J7U1kS2xW31kRkP/WF20gIJDd6ugGCcRksDDe1IkEsUiVCcmVjSrzSt13RTvBk0TkhwEbT/0BUJ9fhgrXKIO1siA9vMoxqTIHvELmPoT4BSHzQQ4gBqGDjOv92jOvvy1RBDqnNUYxP06OXfCQiMV1A5+A05d1Rld/MCtq3ECLrBojNkcGk6Gej/A0tbVHT4d5n6ZeTFAFqCcsEQX2pH2S0FRpJRFT+/jfDSdzhNkRGtg/8MvC5QwAnrRquNSlm26+nMhYFBnavE9eokgfQe9skFk3RLES4RIDHV+PCQyD5cIoj0cHQUV51v28Nd4JzK5Mdu7/KNMVVC7pm0=
-  - secure: FXWd4lrmyQi6BtP8Mq8vlPMsjzrQPGJROEWWeabE29E6/9Od6utR+tNKCflmgIjbc94m1oiph9vI44c+P3eVpKfjj9+FXfTqXGi6sSmeTmCV+H9P1Xuy2pkHoz8M41cx/a8cG8YtkG3Xk8vHXCb1cRN2CQvMrQkllTMLvP3+LG7GImusQ0CS8/X9x0RGqYHMKgvcTwf9ruTqYW32skGmBk1J1TUZ5GliyrLvhovn1ojOvPFRslJlikzG88K9+VmrfkwHdibUflpbTHmfJCCJkaNtJDepKazLiuGACRPXeI7l4ApyqdumNh/6teAlv3wRaS9M99ojAHX0jM5x4RfDUk7iyjNzGxn7QkHukRdU/GykcCxEnbkNf03xcj+hmy0n/unyQZFj58VG0BiafRnlN9qgrEURVWLMh7fVxusPnH5ULvC/p3bUojOdnYefWe+kDhdP0uTpujSCio02/amam12Rgr7Yonkhjm99RxYw+siqBsJPZZW8WPIDrq5yz26UXgbSSfxXbOBqJMLFZTp+E2c9UJMyN729EKMlEODqbr3E0Ui0K8eqnKX4TN/f35ZRYb0qlUrWJoX8/3k7KmpfREtP0ieGyzsIqNWTlakW9aoUWponTvNvd/NQtxcdaLSsHY5Rybwl15MiuDVD4xm7w2twu1fYuahTZE9/xgtBiKs=
+  - secure: FFDtLNuNWlSwgsPeElNzXq3vUc5tgrEdMZyJVmTGigxhsjd7zkd2QID7dFn6P8ma8Du70qTjKGoTz2GnZeJ8hrYjk206jMrAmzKHDme/fCyz65NGGrxpKE3sMhE/LPYQbOMWtQBeG67edEA9Xy8rop1SVBnViTieConNGJGnB5jPcZRnJXERBcvUV8Tnl9PBREJTNUdKJm71irpWmlXk41NDXuPk4ZkS9MM6im3LnuzaRKHAaoklyZtiHphmfYhkD8i60JpXNNOoBFHF0vjf4hCkYCc2Pf9jO0pIGQAGbhwLnNI3RzPZiESb5rc8KqIUZ2vWdxG5KdLH9oyziMn0qlkSSe1uYnrL0K1coKK+x0yCm8C7p9EEUItdRQJICalXPnDKBPrU4qhcb77dHgu8OOOEiJiyPzu5rCrVY3/KRcgssWilft28lI6R2THRDy3ySU2aDHXJDQf3w+Nw76pAc3AO3jIIPHYD5v56PjpxEVmY1/oDJ6vZn3ebwxj/b+qN+Oq3n61x+JNB4we2xRtIFgy9m8yeKauPm0AL6VWh8q0+8G5mvxc2TKxxtbqRWw/sPlHDd5sJuejIQ/0izYgIxw8Dt346qyjgjTbPhiY9ERatP76QepBxzzROTATacInx9xqSvsa4PAdUG9jnyVs87TXXBwLgWURrBoBXWLpCSb4=
+  - secure: kxL0WYTl8O72KEeKfXzMDVjUq7BEfaatK3t6Y+fK+5jf5OvNFwH5FiJucp+u4BwNtIdqua7sRnPJL0Jw1tDNyofNyqIIEwO6rccFCTtQ798x/U54zzE9X4NDNUcOBGtFCjOQlppu/AetWRouBZQjpDzOHtgwv2JydnVUsefa/XSHvw1VGgYS4o2VU0qhiAS7BYgWmY3brChxJXgP96dAnLIC5hvD9MixRiX2xtUSjulVZWZVdfFIEPWIX1kT2ZFCnrU+zLZJn4QQn6iL+9ZiBrJfPzKjFADfZkT9wXrMPc9VKhMaxxu0QSnGWUCzK2HGj7OkH8BIBypBQic2mcKoLz0mZPpeI9XUckMVzuBizqFuPlCmldITdZrtsYj3uS3dNjh+vXg24ZiWlBFtsUvVBKBkVOivpxTOqx4SYI+Gy8cxRGrwtV7QFmBgo3cnz0HvEW7e5cSpVJhR4BKqASO+MUuLiab7HUP9872KQL9vIUDtR0m4O5mQrwl79MKsnTx+ODPFKNseOiFewEsnOyAOJ8dgZbVPqp1PQ1ZucyC3q0Sca615CsU74HG+N+6C11RclmuFKa0YNNWbelIEFLYUMtt/X2zC8xYstcM9kAIe9Mq5t1HuB9rEbf4hsdrK2ij3eoyYgyDD3gR+GLl8DR6LNhftRDjej7FnanYxyQQK3Rw=
 script:
 - "$PYTHON_EXE -m pygame.tests.__main__ --exclude opengl"
 after_success:

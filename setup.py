@@ -14,7 +14,7 @@ EXTRAS = {}
 
 METADATA = {
     "name":             "pygame",
-    "version":          "1.9.2b2",
+    "version":          "1.9.2b3",
     "license":          "LGPL",
     "url":              "http://www.pygame.org",
     "author":           "Pete Shinners, Rene Dudfield, Marcus von Appen, Bob Pendleton, others...",
@@ -23,7 +23,7 @@ METADATA = {
     "long_description": DESCRIPTION,
 }
 
-import sys 
+import sys
 
 if not hasattr(sys, 'version_info') or sys.version_info < (2,3):
     raise SystemExit("Pygame requires Python version 2.3 or above.")

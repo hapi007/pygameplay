@@ -37,8 +37,6 @@ password: {password}
 with open('pypirc', 'w') as f:
     f.write(pypirc_template)
 
-print(pypirc_template)
-
 print('Calling twine to upload...')
 try:
     subprocess.check_call(['twine', 'upload', '--config-file', 'pypirc', filename])
