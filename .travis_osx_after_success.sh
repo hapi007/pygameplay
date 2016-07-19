@@ -3,4 +3,6 @@ CXXFLAGS="-arch i386 -arch x86_64" CFLAGS="-arch i386 -arch x86_64" LDFLAGS="-ar
 # This copies in the .dylib files that are linked to the .so files.
 # It also rewrites the .so file linking options. https://pypi.python.org/pypi/delocate
 delocate-wheel -v dist/*.whl
+
+source .travis_tmp;
 $PYTHON_EXE .travis_osx_upload_whl.py
