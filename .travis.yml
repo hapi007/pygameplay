@@ -85,5 +85,5 @@ script:
   - "$PYTHON_EXE -m pygame.tests.__main__ --exclude opengl -m 8"
 after_success:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_after_success.sh; fi
-after_script:
-  - rm -f .travis_tmp
+# after_script:
+#   - rm -f .travis_tmp
