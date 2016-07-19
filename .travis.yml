@@ -64,12 +64,12 @@ matrix:
         # - MACOSX_DEPLOYMENT_TARGET=10.6
 
 before_install:
-  - "python .travis_osx_upload_whl.py --write-config"
-  - $(set | grep PYPI_ | python -c "import sys;print('\n'.join(['unset %s' % l.split('=')[0] for l in sys.stdin.readlines() if l.startswith('PYPI')]))")
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh;  fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev python-numpy libportmidi-dev libjpeg-dev libtiff4-dev libx11-6 libX11-dev xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic; fi
 install:
+  - "python .travis_osx_upload_whl.py --write-config"
+  - $(set | grep PYPI_ | python -c "import sys;print('\n'.join(['unset %s' % l.split('=')[0] for l in sys.stdin.readlines() if l.startswith('PYPI')]))")
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sdl-config --libs; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls -la /usr/X11R6/include; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx.sh; fi
