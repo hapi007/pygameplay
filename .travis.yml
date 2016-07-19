@@ -60,8 +60,8 @@ matrix:
           - $HOME/Library/Caches/Homebrew
 before_install:
   - set | grep PYPI_ > .travis_tmp
-  - `set | grep PYPI_ | python -c "import sys;print('\n'.join(['unset %s' % l.split('=')[0] for l in sys.stdin.readlines() if l.startswith('PYPI')]))"`
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh;  fi
+  - $(set | grep PYPI_ | python -c "import sys;print('\n'.join(['unset %s' % l.split('=')[0] for l in sys.stdin.readlines() if l.startswith('PYPI')]))")
+  - travis_wait 40 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh;  fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev python-numpy libportmidi-dev libjpeg-dev libtiff4-dev libx11-6 libX11-dev xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic; fi
 install:
@@ -84,4 +84,4 @@ script:
 after_success:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_after_success.sh; fi
 after_script:
-  - rm .travis_tmp
+  - rm -f .travis_tmp
