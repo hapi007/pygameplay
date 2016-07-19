@@ -1,4 +1,12 @@
 language: python
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/Library/Caches/Homebrew
+    - $HOME/.ccache
+    - $HOME/Library/Caches/pip
+
 matrix:
   include:
     # - os: linux
@@ -54,10 +62,7 @@ matrix:
         - PY_VERSION=2
         - MAKEFLAGS=-j8
         # - MACOSX_DEPLOYMENT_TARGET=10.6
-      cache:
-        directories:
-          - $HOME/.cache/pip
-          - $HOME/Library/Caches/Homebrew
+
 before_install:
   - set | grep PYPI_ > .travis_tmp
   - $(set | grep PYPI_ | python -c "import sys;print('\n'.join(['unset %s' % l.split('=')[0] for l in sys.stdin.readlines() if l.startswith('PYPI')]))")

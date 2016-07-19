@@ -7,6 +7,8 @@ brew install pkg-config
 brew unlink libpng
 brew unlink libtiff
 
+brew install ccache
+export PATH=/usr/local/opt/ccache/libexec:$PATH
 
 brew uninstall --force sdl
 brew uninstall --force sdl_image
