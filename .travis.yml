@@ -64,7 +64,7 @@ matrix:
         # - MACOSX_DEPLOYMENT_TARGET=10.6
 
 before_install:
-  - "$PYTHON_EXE .travis_osx_upload_whl.py --write-config"
+  - "python .travis_osx_upload_whl.py --write-config"
   - $(set | grep PYPI_ | python -c "import sys;print('\n'.join(['unset %s' % l.split('=')[0] for l in sys.stdin.readlines() if l.startswith('PYPI')]))")
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_before_install.sh;  fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
