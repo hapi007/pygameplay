@@ -71,6 +71,7 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx.sh; fi
   - "$PIP_CMD install --upgrade setuptools pip"
   - "$PIP_CMD install --upgrade numpy"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then $PIP_CMD install delocate twine; fi
   - "$PYTHON_EXE config.py -auto"
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then $PYTHON_EXE setup.py install -noheaders; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_install.sh; fi
@@ -78,9 +79,10 @@ env:
   global:
     - SDL_VIDEODRIVER=dummy
     - SDL_AUDIODRIVER=disk
-    - secure: FFDtLNuNWlSwgsPeElNzXq3vUc5tgrEdMZyJVmTGigxhsjd7zkd2QID7dFn6P8ma8Du70qTjKGoTz2GnZeJ8hrYjk206jMrAmzKHDme/fCyz65NGGrxpKE3sMhE/LPYQbOMWtQBeG67edEA9Xy8rop1SVBnViTieConNGJGnB5jPcZRnJXERBcvUV8Tnl9PBREJTNUdKJm71irpWmlXk41NDXuPk4ZkS9MM6im3LnuzaRKHAaoklyZtiHphmfYhkD8i60JpXNNOoBFHF0vjf4hCkYCc2Pf9jO0pIGQAGbhwLnNI3RzPZiESb5rc8KqIUZ2vWdxG5KdLH9oyziMn0qlkSSe1uYnrL0K1coKK+x0yCm8C7p9EEUItdRQJICalXPnDKBPrU4qhcb77dHgu8OOOEiJiyPzu5rCrVY3/KRcgssWilft28lI6R2THRDy3ySU2aDHXJDQf3w+Nw76pAc3AO3jIIPHYD5v56PjpxEVmY1/oDJ6vZn3ebwxj/b+qN+Oq3n61x+JNB4we2xRtIFgy9m8yeKauPm0AL6VWh8q0+8G5mvxc2TKxxtbqRWw/sPlHDd5sJuejIQ/0izYgIxw8Dt346qyjgjTbPhiY9ERatP76QepBxzzROTATacInx9xqSvsa4PAdUG9jnyVs87TXXBwLgWURrBoBXWLpCSb4=
-    - secure: kxL0WYTl8O72KEeKfXzMDVjUq7BEfaatK3t6Y+fK+5jf5OvNFwH5FiJucp+u4BwNtIdqua7sRnPJL0Jw1tDNyofNyqIIEwO6rccFCTtQ798x/U54zzE9X4NDNUcOBGtFCjOQlppu/AetWRouBZQjpDzOHtgwv2JydnVUsefa/XSHvw1VGgYS4o2VU0qhiAS7BYgWmY3brChxJXgP96dAnLIC5hvD9MixRiX2xtUSjulVZWZVdfFIEPWIX1kT2ZFCnrU+zLZJn4QQn6iL+9ZiBrJfPzKjFADfZkT9wXrMPc9VKhMaxxu0QSnGWUCzK2HGj7OkH8BIBypBQic2mcKoLz0mZPpeI9XUckMVzuBizqFuPlCmldITdZrtsYj3uS3dNjh+vXg24ZiWlBFtsUvVBKBkVOivpxTOqx4SYI+Gy8cxRGrwtV7QFmBgo3cnz0HvEW7e5cSpVJhR4BKqASO+MUuLiab7HUP9872KQL9vIUDtR0m4O5mQrwl79MKsnTx+ODPFKNseOiFewEsnOyAOJ8dgZbVPqp1PQ1ZucyC3q0Sca615CsU74HG+N+6C11RclmuFKa0YNNWbelIEFLYUMtt/X2zC8xYstcM9kAIe9Mq5t1HuB9rEbf4hsdrK2ij3eoyYgyDD3gR+GLl8DR6LNhftRDjej7FnanYxyQQK3Rw=
 script:
   - "$PYTHON_EXE -m pygame.tests.__main__ --exclude opengl -m 8"
 after_success:
+  env:
+    - secure: "VSoeDwpTooSW8K+n2e+nhQOQGQT7PX9GVBF9SmADUIg0Gr5pR2MTlzyGms57tBIYqFndiuLhOXi5zkH2uhMW0mq2VEDRjY4EP12coMWOnwZsdF8Qoj8x39YPR6QSS28Op6g/DLT5DszchwBlpSXHUJEL0/2iw/5A4OnIF5tMcutpkzq+wX3B+WaTqUi9yffto9/LL9/PEUbED50U94ffguwpIMVBUoxvTNhHO1PJmJKGtP1D9PROapQTp+BjzRMfFwe+9WaYPTr2iG5XZ5cNewyQrPcFGdjXOlEGgS3xxIl25l/jHgUHNZKIOKka1h4gajPxNstjnrMkMNaKnGdFo/GwkqnD2igiVT+0oLekIJ0dkVmOecuJJWUVmwCj9xZc//wW1Xunua9zGXjOeSliArnFFoyq3Md1ktOcTOoaKlWM3+0rgNA/2miYzfyMWGuFUACiQ8+fA98j0I7BcLiiUKa1/pD1fLHUcKknrnSA/hPwRBnlmDGtM2FCZobi3jIltZnadkviCpLjSObq7fE59w/+K0fxZn4GKs/xpEtss7xXxs0CmyJwZ6WVxlZAObfUPiRIdj+tglnB31ZdTNWe+7cC9f8zaQYs8+iaiM6DWehOI1o80RcIAuiU10sba89gqSkn+eOfPvzwg4d/z/XJW05weEL18s4ZvYp+JuqhN2Y="
+    - secure: "EGrZt/2EGOAzwcI69la5RgJ1Fr8uXM0TYarCheBrDVwcESNXccH9myyflN97m/jDrdyJB2fmVgI2WDpFdvnpEXNC7+lTEhApgFx6L1TwE/s5Fj6Kd72cERcPmDwLwzQFChXl2kjPTgu/Qr2u2X3EYCfEd0jRf+TcdHasvOLeGuQu7l0cnyW6WK+xMhF1wV8O9F1IdggyeysYIpP/v8rCtmjd268AqploBJ3cM3qau1F9NYBCSUPhu9eZfB0JRhHzeFDbNxRJtG+WZjk2CuGi1W8BGM/CeJkM/3b7iHMEwCYd8JW4k8ZYLSrPUiHkKxSeL9R12+p9u6AHMlXfEfO96Nt8pQkhVP9BxH374RRvQsIl5OxACTAW9XEiqTP7aRXIBSOxX6p3DxUXl6Ogn0d9U5rIu4SUAiaWW9e0k+Oeo/H3OGuerFlBIh6rW4kzVZ7ftcqzVRz9QgnrSy2r93BYzTWwM3eifkFQwtgnBSvXxM151leHOJ9r3PAiRup7V90WZBD4zytQSMaOc+fcdIWscP88sPcLXZEb6n6y7Ja3t5ASO58dXLw9EvqS4CsRYI08ltH85L/cq37dKgpvu33lsx1ZDksiMKtZW7tXhV1DZ9thl1JH/3f9QLRFz+02mJ6FD4PCJRYQvDDs5J4j7rf76FUlcBr+9bAN0sRnPL6UOms="
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source .travis_osx_after_success.sh; fi

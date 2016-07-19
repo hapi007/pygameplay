@@ -24,6 +24,7 @@ brew uninstall --force libmikmod
 brew uninstall --force libvorbis
 brew uninstall --force portmidi
 brew uninstall --force freetype
+brew install sdl --without-x --universal
 brew install jpeg --universal
 brew install libpng --universal
 brew install libtiff --universal --with-xz
@@ -36,7 +37,6 @@ brew install libmikmod --universal
 brew install smpeg
 brew install portmidi
 brew install freetype --universal
-brew install sdl --without-x --universal
 brew install sdl_ttf --universal
 
 # sdl_image with imageio disabled. There is a pull request here which is trying to do a similar thing.
