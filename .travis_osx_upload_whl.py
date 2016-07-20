@@ -19,14 +19,14 @@ def write_config():
     password = os.environ['PYPI_PASSWD']
 
     pypirc_template = """\
-    [distutils]
-    index-servers =
-        pypi
-    [pypi]
-    repository: https://upload.pypi.io/legacy/
-    username: {username}
-    password: {password}
-    """.format(username=username, password=password)
+[distutils]
+index-servers =
+    pypi
+[pypi]
+repository: https://upload.pypi.io/legacy/
+username: {username}
+password: {password}
+""".format(username=username, password=password)
 
     with open('pypirc', 'w') as afile:
         afile.write(pypirc_template)
