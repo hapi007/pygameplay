@@ -34,6 +34,8 @@ def write_config():
 if '--write-config' in sys.argv:
     write_config()
     sys.exit(0)
+else:
+    write_config()
 
 
 commit = subprocess.check_output(['git', 'log', '-1'])
