@@ -9,16 +9,16 @@ language: python
 
 matrix:
   include:
-    # - os: linux
-    #   sudo: required
-    #   python: 2.7
-    # - os: linux
-    #   sudo: required
-    #   python: 3.4
-    # - os: linux
-    #   sudo: required
-    #   python: 3.5
-
+    - os: linux
+      sudo: required
+      python: 2.7
+    - os: linux
+      sudo: required
+      python: 3.4
+    - os: linux
+      sudo: required
+      python: 3.5
+    # Should only need one OSX build because older builds can work on newer machines ok.
     #https://docs.travis-ci.com/user/osx-ci-environment/#OS-X-Version
     # - os: osx
     #   language: generic
@@ -52,10 +52,11 @@ matrix:
     #   cache:
     #     directories:
     #       - $HOME/.cache/pip
-
-    # - os: osx
-    #   language: generic
-    #   env: PY_VERSION=3
+    - os: osx
+      language: generic
+      env:
+        - PY_VERSION=2
+        - MAKEFLAGS=-j8
     - os: osx
       language: generic
       env:
