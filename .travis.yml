@@ -55,7 +55,7 @@ matrix:
     - os: osx
       language: generic
       env:
-        - PY_VERSION=2
+        - PY_VERSION=3
         - MAKEFLAGS=-j8
     - os: osx
       language: generic
