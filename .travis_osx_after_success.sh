@@ -5,4 +5,4 @@ CXXFLAGS="-arch i386 -arch x86_64" CFLAGS="-arch i386 -arch x86_64" LDFLAGS="-ar
 delocate-wheel -v dist/*.whl
 
 
-$PYTHON_EXE .travis_osx_upload_whl.py
+$PYTHON_EXE .travis_osx_upload_whl.py --no-config
